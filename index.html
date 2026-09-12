@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Usmonovs Premium — Luxury Krossovkalar</title>
+<link rel="icon" href="logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { ember:{DEFAULT:"#F74718",50:"#FFF3EE",100:"#FFE2D6",200:"#FFC3AD",300:"#FF9A78",400:"#FB6A3C",500:"#F74718",600:"#D8350B",700:"#B22908"}, ink:{DEFAULT:"#0B0B0C",soft:"#1A1A1D",muted:"#6B6B70",faint:"#9A9AA0"}, paper:"#FFFFFF", chalk:"#FAFAF8", line:"#EDEDEA" },
+  fontFamily: { display:['"Bricolage Grotesque"','system-ui','sans-serif'], sans:['Inter','system-ui','sans-serif'] },
+}}};
+</script>
+<style>
+  *{ -webkit-font-smoothing:antialiased; }
+  body{ margin:0; background:#fff; color:#0B0B0C; font-family:Inter,system-ui,sans-serif; }
+  ::selection{ background:#F74718; color:#fff; }
+  .font-display{ font-family:"Bricolage Grotesque",system-ui,sans-serif; }
+  .tnum{ font-variant-numeric:tabular-nums; }
+  .card{ border-radius:1.5rem; background:#fff; border:1px solid #F0F0EC; box-shadow:0 2px 4px rgba(11,11,12,.02),0 18px 40px -24px rgba(11,11,12,.14); }
+  .btn-ember{ background:#F74718; color:#fff; box-shadow:0 12px 30px -10px rgba(247,71,24,.45); }
+  .btn-ember:hover{ background:#D8350B; transform:translateY(-1px); }
+  .btn-ghost{ background:#fff; color:#0B0B0C; border:1px solid #EDEDEA; }
+  .btn-ghost:hover{ border-color:rgba(11,11,12,.3); }
+  .btn{ display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:999px;padding:.75rem 1.5rem;font-weight:600;font-size:.9rem;cursor:pointer;border:0;transition:all .2s;white-space:nowrap; }
+  .input{ width:100%;border-radius:.85rem;border:1px solid #EDEDEA;background:#fff;padding:.7rem 1rem;font-size:.9rem;color:#0B0B0C;outline:none;transition:all .2s;box-sizing:border-box; }
+  .input:focus{ border-color:#F74718; box-shadow:0 0 0 4px rgba(247,71,24,.1); }
+  .kicker{ font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:#F74718; }
+  .dot{ width:8px;height:8px;border-radius:999px;background:#E2E2DD;transition:all .3s;cursor:pointer;border:0;padding:0; }
+  .dot.active{ width:26px;background:#F74718; }
+  .edge-fade{ -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  @keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes fadeUp{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+  .fade-up{ animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both; }
+  .marquee{ animation:marquee 32s linear infinite; }
+  .card-hover{ transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s; }
+  .card-hover:hover{ transform:translateY(-6px); }
+  ::-webkit-scrollbar{ width:10px;height:10px; } ::-webkit-scrollbar-thumb{ background:#dcdcd8;border-radius:999px;border:3px solid #fff;background-clip:content-box; }
+  [hidden]{ display:none!important; }
+  /* Liquid glass — transparent, not milky white */
+  .liquid{ background:rgba(250,250,248,.28); backdrop-filter:blur(22px) saturate(180%); -webkit-backdrop-filter:blur(22px) saturate(180%); box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 12px 34px -20px rgba(11,11,12,.28); border-bottom:1px solid rgba(255,255,255,.45); }
+  .liquid-card{ background:rgba(255,255,255,.5); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border:1px solid rgba(255,255,255,.6); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 16px 40px -24px rgba(11,11,12,.3); }
+  #carousel, .hero-fill{ height:calc(100vh - 66px); height:calc(100svh - 66px); min-height:460px; }
+  @media (min-width:1024px){ #carousel, .hero-fill{ height:calc(100vh - 70px); } }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none!important; } }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header id="hdr" class="liquid sticky top-0 z-40 transition-all">
+  <div class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-8">
+    <a href="#/" class="flex items-center gap-2.5">
+      <img src="logo.png" alt="Usmonovs Premium" style="width:38px;height:38px;object-fit:contain" />
+      <span class="leading-none"><span class="block font-display text-[15px] font-extrabold uppercase tracking-[0.06em] text-ink">Usmonovs</span><span class="mt-0.5 block text-[9px] font-semibold uppercase tracking-[0.4em] text-ember">Premium</span></span>
+    </a>
+    <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex text-sm font-medium text-ink-muted">
+      <a href="#/" class="transition hover:text-ink">Bosh sahifa</a>
+      <a href="#/shop" class="transition hover:text-ink">Do'kon</a>
+      <a href="#/shop?tier=Luxury" class="transition hover:text-ink">Lyuks</a>
+      <a href="#/shop?tier=Sport" class="transition hover:text-ink">Sport</a>
+      <button onclick="scrollToSection('about')" class="transition hover:text-ink">Biz haqimizda</button>
+      <button onclick="scrollToSection('aloqa')" class="transition hover:text-ink">Aloqa</button>
+    </nav>
+    <div class="flex items-center gap-1.5">
+      <a href="#/shop" class="flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:bg-white/50 hover:text-ember" title="Qidiruv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+      <button onclick="openMenu()" class="flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:bg-white/50 hover:text-ember lg:hidden" title="Menyu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-6 w-6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <button onclick="openCart()" class="relative flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:bg-white/50 hover:text-ember" title="Savat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-[22px] w-[22px]"><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M2 3h2l2.4 12.2a1 1 0 0 0 1 .8h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg>
+        <span id="cartCount" class="absolute -right-0.5 -top-0.5 hidden h-5 min-w-5 items-center justify-center rounded-full bg-ember px-1 text-[11px] font-bold text-white tnum ring-2 ring-white/70"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="view"></main>
+
+<!-- Footer -->
+<footer class="relative overflow-hidden border-t border-line bg-chalk">
+  <div class="pointer-events-none absolute -bottom-8 left-0 right-0 select-none text-center font-display text-[22vw] font-extrabold uppercase leading-none tracking-tighter text-ink/[0.03] lg:text-[15rem]">Usmonovs</div>
+  <div class="relative mx-auto max-w-7xl px-5 py-16 lg:px-8">
+    <div class="grid grid-cols-2 gap-10 lg:grid-cols-4">
+      <div class="col-span-2">
+        <div class="flex items-center gap-3"><img src="logo.png" style="width:44px;height:44px;object-fit:contain"/><div class="leading-none"><span class="block font-display text-lg font-extrabold uppercase tracking-[0.06em] text-ink">Usmonovs</span><span class="mt-1 block text-[10px] font-semibold uppercase tracking-[0.4em] text-ember">Premium</span></div></div>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-ink-muted">Dunyoning eng nufuzli krossovka uylari — har bir juftlik did bilan tanlangan. Original mahsulotlar alohida belgilanadi. KROSSOVKA · LUXURY OYOQ KIYIMLAR.</p>
+      </div>
+      <div><h4 class="text-xs font-semibold uppercase tracking-wider text-ink">Do'kon</h4><ul class="mt-4 space-y-2.5 text-sm text-ink-muted"><li><a href="#/shop" class="hover:text-ember">Barcha mahsulotlar</a></li><li><a href="#/shop?tier=Luxury" class="hover:text-ember">Lyuks</a></li><li><a href="#/shop?tier=Sport" class="hover:text-ember">Sport</a></li></ul></div>
+      <div><h4 class="text-xs font-semibold uppercase tracking-wider text-ink">Yordam</h4><ul class="mt-4 space-y-2.5 text-sm text-ink-muted"><li>Yetkazib berish</li><li>Qaytarish</li><li>Aloqa</li></ul></div>
+    </div>
+    <div class="mt-14 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 text-xs text-ink-faint sm:flex-row">
+      <p>© 2026 Usmonovs Premium. Barcha huquqlar himoyalangan.</p>
+      <div class="flex items-center gap-5"><a href="https://www.instagram.com/usmonovs_premium/" target="_blank" rel="noopener" class="hover:text-ember">@usmonovs_premium</a><a href="tel:+998905245555" class="hover:text-ember">+998 90 524 55 55</a><a href="admin.html" title="Boshqaruv paneli" class="font-display text-xs font-bold uppercase tracking-[0.3em] text-ink-faint hover:text-ember">up</a></div>
+    </div>
+  </div>
+</footer>
+
+<div id="cartRoot"></div>
+<div id="modalRoot"></div>
+
+<script src="store.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const view = () => $("#view");
+let carouselTimer = null;
+
+/* header shadow on scroll */
+addEventListener("scroll", () => { $("#hdr").style.boxShadow = scrollY>8 ? "inset 0 1px 0 rgba(255,255,255,.6), 0 16px 40px -22px rgba(11,11,12,.35)" : ""; }, {passive:true});
+
+/* ---------- shared bits ---------- */
+function visual(p, cls, tinted) {
+  if (p && p.image) return `<div class="relative overflow-hidden bg-chalk ${cls}"><img src="${p.image}" alt="${USM.esc(p.name)}" class="h-full w-full object-cover"/></div>`;
+  const name = p ? p.name : "U", brand = p ? p.brandName : "U";
+  let h=0; for(let i=0;i<name.length;i++) h=(h*31+name.charCodeAt(i))>>>0;
+  const grads=["from-[#F5F3EF] to-[#E9E5DE]","from-[#F6F4F0] to-[#ECE8E1]","from-[#F3F1EC] to-[#E4E0D8]","from-[#F7F2EC] to-[#EEE3D9]","from-[#EEF0F2] to-[#E0E3E7]","from-[#F4F1F5] to-[#E7E1EA]","from-[#F1F4F1] to-[#E0E7E0]","from-[#F7F4EE] to-[#EDE6D8]"];
+  const g = tinted ? "from-ember-50 to-ember-100" : grads[h%grads.length];
+  const mono = (brand||"U").trim()[0];
+  const rot = ((h>>4)%7)-3;
+  const sz = 46 + ((h>>7)%16);
+  return `<div class="relative flex items-center justify-center overflow-hidden bg-gradient-to-br ${g} ${cls}">
+    <span class="pointer-events-none absolute select-none font-display font-extrabold leading-none ${tinted?'text-ember/15':'text-ink/[0.06]'}" style="font-size:min(46vw,210px);top:-6%;right:-4%">${USM.esc(mono)}</span>
+    <div class="relative ${tinted?'text-ember/70':'text-ink/40'}" style="width:${sz}%;transform:rotate(${rot}deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h20v0a2 2 0 0 1-2 2H2v-2Z"/><path d="M2 17v-4l5-2 3 3 4-3c2 2 4 2.5 8 3v3"/><path d="M7 11l1.5 1.5"/></svg></div>
+  </div>`;
+}
+function card(p, tinted) {
+  const model = p.name.replace(p.brandName,"").trim() || p.name;
+  return `<a href="#/product/${p.id}" class="group block">
+    <div class="relative overflow-hidden rounded-3xl border border-line bg-chalk">
+      ${visual(p,"aspect-square w-full transition-transform duration-500 group-hover:scale-105",tinted)}
+      <div class="absolute left-3 top-3 flex flex-col gap-1.5">
+        ${p.original?'<span class="inline-flex items-center gap-1 rounded-full bg-ember px-2.5 py-1 text-[11px] font-semibold text-white">✓ Original</span>':''}
+      </div>
+      <div class="absolute inset-x-3 bottom-3 translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"><span class="flex items-center justify-center rounded-full btn-ember py-2.5 text-xs font-semibold">Ko'rish →</span></div>
+    </div>
+    <div class="mt-3 px-0.5">
+      <div class="flex items-start justify-between gap-2"><p class="text-[11px] font-semibold uppercase tracking-wider text-ember">${USM.esc(p.brandName)}</p><span class="text-[11px] text-ink-faint">1 rang</span></div>
+      <h3 class="mt-0.5 truncate text-sm font-semibold text-ink">${USM.esc(model)}</h3>
+      <p class="truncate text-xs text-ink-faint">${USM.esc(p.colorway)}</p>
+      <div class="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="whitespace-nowrap text-sm font-semibold text-ink tnum">${USM.money(p.price)}</span>${p.compareAtPrice?`<span class="whitespace-nowrap text-xs text-ink-faint line-through tnum">${USM.money(p.compareAtPrice)}</span>`:''}</div>
+    </div>
+  </a>`;
+}
+
+/* ---------- HOME ---------- */
+function home() {
+  const feat = USM.featured();
+  const brands = USM.brandsWithCounts();
+  const tiers = [["Luxury","Luxury","Balenciaga, Dior, Gucci va kutyur uylari."],["Performance","Performance","Salomon, Hoka, On va Arc'teryx."],["Sport","Sport","Nike, Adidas, New Balance va boshqalar."]];
+  const marquee = ["Balenciaga","Dior","Gucci","Prada","Louis Vuitton","Nike","Salomon","New Balance","Off-White","Adidas","Rick Owens","Bottega Veneta"];
+  const ab = USM.about();
+  view().innerHTML = `
+  <section class="relative">${feat.length ? carousel(feat) : `
+    <div class="hero-fill relative flex flex-col items-center justify-center overflow-hidden bg-chalk px-6 text-center">
+      <div class="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-ember/10" style="filter:blur(120px)"></div>
+      <img src="logo.png" alt="Usmonovs Premium" style="width:84px;height:84px;object-fit:contain"/>
+      <h1 class="mt-6 font-display text-4xl font-extrabold uppercase tracking-tight text-ink sm:text-6xl">Usmonovs <span class="text-ember">Premium</span></h1>
+      <p class="mt-4 max-w-md text-ink-muted">Dunyoning eng nufuzli krossovka brendlari. Yangi kolleksiya tez orada — kuzatib boring.</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3"><a href="#/shop" class="btn btn-ember px-7 py-3.5 text-base">Do'konga kirish →</a><button onclick="scrollToSection('aloqa')" class="btn btn-ghost px-7 py-3.5 text-base">Biz bilan bog'lanish</button></div>
+    </div>`}</section>
+
+  <section class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+    <p class="kicker">Kolleksiyalar</p><h2 class="mb-8 mt-1 font-display text-3xl font-extrabold tracking-tight text-ink lg:text-4xl">Uslubingizni tanlang</h2>
+    <div class="grid gap-4 lg:grid-cols-3">${tiers.map(([tier,title,copy])=>`
+      <a href="#/shop?tier=${tier}" class="card-hover group relative flex min-h-[260px] flex-col justify-end overflow-hidden rounded-3xl border border-line">
+        ${visual({name:tier+title,brandName:tier},"absolute inset-0 h-full w-full",false)}
+        <div class="absolute inset-0" style="background:linear-gradient(to top,#fff,rgba(255,255,255,.4),transparent)"></div>
+        <div class="relative p-6"><h3 class="font-display text-2xl font-extrabold text-ink">${title}</h3><p class="mt-1.5 max-w-xs text-sm text-ink-muted">${copy}</p><span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-ember">Xarid qilish →</span></div>
+      </a>`).join("")}</div>
+  </section>
+
+  ${feat.length ? `<section class="mx-auto max-w-7xl px-5 pb-20 lg:px-8">
+    <div class="mb-8 flex items-end justify-between"><div><p class="kicker">Siz uchun</p><h2 class="mt-1 font-display text-3xl font-extrabold tracking-tight text-ink lg:text-4xl">Siz uchun tanlangan juftliklar</h2></div><a href="#/shop" class="hidden text-sm font-semibold text-ember hover:underline sm:block">Barchasini ko'rish →</a></div>
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">${feat.slice(0,8).map((p,i)=>card(p,i===0)).join("")}</div>
+  </section>` : ""}
+
+  <section class="bg-chalk"><div class="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:grid-cols-3 lg:px-8">
+    ${[["Sifat kafolati","Har bir juftlik sifat nazoratidan o'tadi. Original mahsulotlar alohida belgilanadi."],["Bepul yetkazish","Yirik buyurtmalarga butun O'zbekiston bo'ylab bepul yetkazib berish."],["Shaxsiy konsyerj","Nodir juftliklarni topib beruvchi shaxsiy maslahatchi — xizmatingizda."]].map(([t,c])=>`<div class="flex gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl btn-ember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div><div><h3 class="font-display text-lg font-bold text-ink">${t}</h3><p class="mt-1 text-sm leading-relaxed text-ink-muted">${c}</p></div></div>`).join("")}
+  </div></section>
+
+  <section id="about" class="scroll-mt-24 bg-paper">
+    <div class="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <p class="kicker">Biz haqimizda</p>
+          <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink lg:text-4xl">${USM.esc(ab.title)}</h2>
+          <p class="mt-5 leading-relaxed text-ink-muted" style="white-space:pre-line">${USM.esc(ab.text)}</p>
+          <a href="#/shop" class="btn btn-ember mt-8 px-6 py-3">Do'konni ko'rish →</a>
+        </div>
+        <div class="overflow-hidden rounded-3xl border border-line shadow-xl">${ab.image?`<img src="${ab.image}" alt="Usmonovs Premium" class="aspect-[4/3] w-full object-cover"/>`:visual({name:"Usmonovs Premium Boutique",brandName:"Usmonovs"},"aspect-[4/3] w-full",true)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aloqa" class="scroll-mt-24 bg-chalk">
+    <div class="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
+      <p class="kicker">Aloqa</p>
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink lg:text-4xl">Biz bilan bog'laning</h2>
+      <p class="mt-2 max-w-xl text-ink-muted">Ikki filialimiz Andijonda. Savol yoki buyurtma uchun qo'ng'iroq qiling.</p>
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <div class="card p-6"><div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-ember/10 text-ember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3 class="font-display text-lg font-bold text-ink">1-filial</h3></div><p class="mt-3 text-sm leading-relaxed text-ink-muted">Andijon shahar, Mashrab ko'chasi 6-uy. Mo'ljal: Karvon Saroy hotel ro'parasi.</p><a href="https://maps.app.goo.gl/wdwqLNHb2rv6ejth7" target="_blank" rel="noopener" class="btn btn-ghost mt-4 px-5 py-2 text-sm">Xaritada ochish →</a></div>
+        <div class="card p-6"><div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-xl bg-ember/10 text-ember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3 class="font-display text-lg font-bold text-ink">2-filial</h3></div><p class="mt-3 text-sm leading-relaxed text-ink-muted">Navruz Mall ro'parasi, Usmonovs Premium do'koni. Mo'ljal: Akmal Farm yonida.</p><a href="https://maps.app.goo.gl/yR6rjoanrff5gPFW7" target="_blank" rel="noopener" class="btn btn-ghost mt-4 px-5 py-2 text-sm">Xaritada ochish →</a></div>
+      </div>
+      <div class="mt-4 grid gap-4 md:grid-cols-3">
+        <div class="card p-6"><h3 class="font-display text-base font-bold text-ink">Telefon</h3><a href="tel:+998905245555" class="mt-1 block font-display text-xl font-extrabold text-ink hover:text-ember">+998 90 524 55 55</a><a href="tel:+998905245555" class="btn btn-ember mt-3 px-5 py-2 text-sm">Qo'ng'iroq qilish</a></div>
+        <div class="card p-6"><h3 class="font-display text-base font-bold text-ink">Instagram</h3><a href="https://www.instagram.com/usmonovs_premium/" target="_blank" rel="noopener" class="mt-1 block font-medium text-ink hover:text-ember">@usmonovs_premium</a><a href="https://www.instagram.com/usmonovs_premium/" target="_blank" rel="noopener" class="btn btn-ghost mt-3 px-5 py-2 text-sm">Sahifaga o'tish →</a></div>
+        <div class="card p-6"><h3 class="font-display text-base font-bold text-ink">Ish vaqti</h3><p class="mt-1 text-sm leading-relaxed text-ink-muted">Har kuni<br/><span class="font-semibold text-ink">09:00 – 00:00</span></p></div>
+      </div>
+    </div>
+  </section>`;
+  if (feat.length) startCarousel(feat);
+}
+
+/* ---------- CAROUSEL ---------- */
+function carousel(items) {
+  const slides = items.slice(0,6);
+  return `<div id="carousel" class="relative w-full overflow-hidden bg-chalk">
+    <div class="relative h-full w-full">
+      ${slides.map((p,i)=>`<a href="#/product/${p.id}" class="cslide absolute inset-0 transition-opacity duration-[900ms]" data-i="${i}" style="opacity:${i===0?1:0}">${visual(p,"h-full w-full",i%2===0)}</a>`).join("")}
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 p-5 lg:p-10"><div class="pointer-events-auto mx-auto max-w-7xl"><div id="csCap"></div></div></div>
+      <button onclick="csGo(-1)" class="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full liquid-card text-ink lg:left-6 lg:h-14 lg:w-14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5 rotate-180 lg:h-6 lg:w-6"><path d="m9 18 6-6-6-6"/></svg></button>
+      <button onclick="csGo(1)" class="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full liquid-card text-ink lg:right-6 lg:h-14 lg:w-14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5 lg:h-6 lg:w-6"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div id="csDots" class="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2 lg:bottom-6">${slides.map((_,i)=>`<button class="dot ${i===0?'active':''}" onclick="csGo(0,${i})"></button>`).join("")}</div>
+    </div>
+  </div>`;
+}
+let csItems=[], csI=0;
+function startCarousel(items){ csItems=items.slice(0,6); csI=0; csCap(); if(carouselTimer)clearInterval(carouselTimer); if(csItems.length>1) carouselTimer=setInterval(()=>csGo(1),5000); }
+function csCap(){ const p=csItems[csI]; if(!p)return; const cap=$("#csCap"); if(!cap)return; const model=p.name.replace(p.brandName,"").trim()||p.name;
+  cap.innerHTML=`<div class="liquid-card max-w-md rounded-3xl p-5 lg:p-7">
+    <p class="text-[11px] font-semibold uppercase tracking-wider text-ember">${p.original?'✓ Original · ':''}${USM.esc(p.brandName)}</p>
+    <h2 class="mt-1 font-display text-2xl font-extrabold leading-tight text-ink lg:text-4xl">${USM.esc(model)}</h2>
+    <div class="mt-3 flex flex-wrap items-center gap-4"><span class="font-display text-lg font-extrabold text-ink tnum lg:text-2xl">${USM.money(p.price)}</span><a href="#/product/${p.id}" class="btn btn-ember px-6 py-2.5 text-sm">Ko'rish →</a></div>
+  </div>`; }
+function csGo(dir,to){ if(!csItems.length)return; csI = to!=null ? to : (csI+dir+csItems.length)%csItems.length; document.querySelectorAll(".cslide").forEach(el=>el.style.opacity = (+el.dataset.i===csI)?1:0); document.querySelectorAll("#csDots .dot").forEach((el,i)=>el.classList.toggle("active",i===csI)); csCap(); }
+
+/* ---------- SHOP ---------- */
+let shopState = { q:"", brandId:"", tier:"", sort:"newest" };
+let shopLimit = 24;
+function catBrandControls(){
+  const brands = USM.brandsWithCounts();
+  const TIERS=[["Luxury","Lyuks"],["Premium","Premium"],["Performance","Performance"],["Sport","Sport"]];
+  return `<div class="space-y-7">
+    <div><h3 class="mb-3 font-display text-xs font-bold uppercase tracking-wider text-ink">Kategoriya</h3><div class="space-y-1">
+      <button onclick="setTier('')" class="block w-full rounded-lg px-3 py-2 text-left text-sm ${!shopState.tier?'btn-ember':'text-ink-muted hover:bg-chalk'}">Barchasi</button>
+      ${TIERS.map(([v,l])=>`<button onclick="setTier('${v}')" class="block w-full rounded-lg px-3 py-2 text-left text-sm ${shopState.tier===v?'btn-ember':'text-ink-muted hover:bg-chalk'}">${l}</button>`).join("")}
+    </div></div>
+    <div><h3 class="mb-3 font-display text-xs font-bold uppercase tracking-wider text-ink">Brend</h3><div class="max-h-72 space-y-0.5 overflow-y-auto pr-1">
+      <button onclick="setBrand('')" class="block w-full rounded-lg px-3 py-1.5 text-left text-sm ${!shopState.brandId?'text-ember':'text-ink-muted hover:bg-chalk'}">Barcha brendlar</button>
+      ${brands.map(b=>`<button onclick="setBrand('${b.id}')" class="flex w-full items-center justify-between rounded-lg px-3 py-1.5 text-left text-sm ${shopState.brandId===b.id?'bg-chalk font-medium text-ink':'text-ink-muted hover:bg-chalk'}">${USM.esc(b.name)}<span class="tnum text-xs text-ink-faint">${b.productCount}</span></button>`).join("")}
+    </div></div>
+    <button onclick="shopState={q:shopState.q,brandId:'',tier:'',sort:shopState.sort};closeCart();$('#modalRoot').innerHTML='';shop()" class="text-sm font-medium text-ember hover:underline">Filtrlarni tozalash</button>
+  </div>`;
+}
+function sortSelect(){ return `<select class="input" style="width:auto" onchange="shopState.sort=this.value;renderGrid()">${[["newest","Eng yangi"],["price_desc","Narx: yuqoridan"],["price_asc","Narx: pastdan"],["popular","Ommabop"]].map(([v,l])=>`<option value="${v}" ${shopState.sort===v?'selected':''}>${l}</option>`).join("")}</select>`; }
+function shop(params) {
+  if(params){ shopState.brandId=params.get("brandId")||""; shopState.tier=params.get("tier")||""; }
+  const brands = USM.brandsWithCounts();
+  const list = USM.shopProducts(shopState);
+  const activeBrand = brands.find(b=>b.id===shopState.brandId);
+  const tierUz = {Luxury:"Lyuks",Premium:"Premium",Performance:"Performance",Sport:"Sport"}[shopState.tier];
+  const heading = activeBrand?activeBrand.name:(tierUz?tierUz+" kolleksiya":"Barcha mahsulotlar");
+  view().innerHTML = `
+  <div class="mx-auto max-w-7xl px-5 py-8 lg:px-8">
+    <div class="mb-6 border-b border-line pb-5"><p class="kicker">Kolleksiya</p><h1 class="mt-1 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">${USM.esc(heading)}</h1><p class="mt-1 text-sm text-ink-muted">${list.length} juftlik mavjud</p></div>
+    <!-- toolbar: search always visible; Filtrlar (mobile) + sort -->
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div class="relative flex-1"><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9A9AA0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4 w-4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><input id="shopQ" class="input" style="padding-left:2.5rem" placeholder="Qidirish…" value="${USM.esc(shopState.q)}"/></div>
+      <div class="flex items-center gap-3">
+        <button onclick="openShopFilters()" class="btn btn-ghost flex-1 sm:flex-none lg:hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4 w-4"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z"/></svg> Filtrlar</button>
+        ${sortSelect()}
+      </div>
+    </div>
+    <div class="grid gap-8 lg:grid-cols-[240px_1fr]">
+      <aside class="hidden lg:block">${catBrandControls()}</aside>
+      <div><div id="shopGrid" class="grid grid-cols-2 gap-4 sm:grid-cols-3"></div><div id="loadMoreWrap" class="mt-10 flex justify-center"></div></div>
+    </div>
+  </div>`;
+  shopLimit = 24;
+  renderGrid();
+  const q=$("#shopQ"); if(q) q.addEventListener("input", e=>{ shopState.q=e.target.value; shopLimit=24; renderGrid(); });
+}
+function openShopFilters(){
+  $("#modalRoot").innerHTML = `<div class="fixed inset-0 z-50 lg:hidden"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML=''"></div>
+    <div class="absolute inset-x-0 bottom-0 max-h-[82vh] overflow-y-auto rounded-t-3xl bg-paper p-6">
+      <div class="mb-4 flex items-center justify-between"><h2 class="font-display text-lg font-bold uppercase text-ink">Filtrlar</h2><button onclick="$('#modalRoot').innerHTML=''" class="rounded-lg p-2 text-ink-faint">✕</button></div>
+      ${catBrandControls()}
+      <button onclick="$('#modalRoot').innerHTML=''" class="btn btn-ember mt-6 w-full py-3">Natijalarni ko'rish</button>
+    </div></div>`;
+}
+function renderGrid(){
+  const list=USM.shopProducts(shopState); const g=$("#shopGrid"); const wrap=$("#loadMoreWrap"); if(!g)return;
+  if(!list.length){ g.innerHTML=`<div class="col-span-full rounded-2xl border border-dashed border-line py-24 text-center text-ink-muted">Filtrlarga mos juftlik topilmadi.</div>`; if(wrap)wrap.innerHTML=""; return; }
+  g.innerHTML = list.slice(0,shopLimit).map(p=>card(p)).join("");
+  if(wrap) wrap.innerHTML = list.length>shopLimit ? `<button onclick="shopLimit+=24;renderGrid()" class="btn btn-ghost px-8 py-3">Ko'proq ko'rish · ${list.length-shopLimit} ta</button>` : "";
+}
+function setTier(t){ shopState.tier=t; shopState.brandId=""; $('#modalRoot').innerHTML=''; shop(); }
+function setBrand(b){ shopState.brandId=b; shopState.tier=""; $('#modalRoot').innerHTML=''; shop(); }
+
+/* ---------- PRODUCT ---------- */
+function product(id){
+  const p = USM.product(id);
+  if(!p || p.status!=="Active"){ view().innerHTML=`<div class="mx-auto max-w-2xl px-5 py-32 text-center"><h1 class="font-display text-3xl font-extrabold text-ink">Juftlik topilmadi</h1><a href="#/shop" class="btn btn-ember mt-6">Do'konga qaytish</a></div>`; return; }
+  const sizes = USM.sizesOf(p), model = p.name.replace(p.brandName,"").trim()||p.name;
+  const discount = p.compareAtPrice?Math.round((1-p.price/p.compareAtPrice)*100):0;
+  const related = USM.related(p);
+  // gallery: uploaded images, or 4 generated variant visuals — every product shows ≥4 images
+  let gal;
+  if (p.images && p.images.length) gal = p.images.map(im=>`<img src="${im}" class="h-full w-full object-cover" alt="${USM.esc(p.name)}"/>`);
+  else gal = [0,1,2,3].map(i=>visual({name:p.name+"#"+i, brandName:p.brandName}, "h-full w-full", i===0));
+  window._gal = gal; window._galSrc = (p.images && p.images.length) ? p.images.slice() : null; window._galI = 0;
+  view().innerHTML = `
+  <div class="mx-auto max-w-7xl px-5 py-8 lg:px-8">
+    <nav class="mb-6 flex items-center gap-1.5 text-sm text-ink-faint"><a href="#/" class="hover:text-ink">Bosh sahifa</a> › <a href="#/shop" class="hover:text-ink">Do'kon</a> › <span class="text-ink-muted">${USM.esc(p.brandName)}</span></nav>
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="space-y-4">
+        <div class="group relative overflow-hidden rounded-[2rem] border border-line bg-chalk shadow-xl" onmouseenter="stopGalleryAuto()" onmouseleave="startGalleryAuto()">
+          <div id="galMainWrap" class="aspect-[4/5] w-full cursor-zoom-in" onclick="openZoom()">${gal[0]}</div>
+          <span class="pointer-events-none absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/80 text-ink shadow backdrop-blur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4 w-4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+        </div>
+        <div class="grid gap-3" style="grid-template-columns:repeat(${gal.length},minmax(0,1fr))">${gal.map((g,i)=>`<button onclick="galSet(${i})" class="galThumb aspect-square overflow-hidden rounded-xl border-2 ${i===0?'border-ember':'border-line'}"><div class="pointer-events-none h-full w-full">${g}</div></button>`).join("")}</div>
+      </div>
+      <div class="lg:py-4">
+        <div class="flex items-center gap-3"><p class="text-xs font-semibold uppercase tracking-widest text-ember">${USM.esc(p.brandName)}</p>${p.original?'<span class="inline-flex items-center gap-1 rounded-full bg-ember px-2.5 py-1 text-[11px] font-semibold text-white">✓ Original mahsulot</span>':''}</div>
+        <h1 class="mt-2 font-display text-4xl font-extrabold uppercase leading-tight tracking-tight text-ink">${USM.esc(model)}</h1>
+        <p class="mt-2 text-sm text-ink-muted">${USM.esc(p.colorway)} · Kod ${p.sku}</p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1"><span class="font-display text-2xl font-extrabold text-ink tnum sm:text-3xl">${USM.money(p.price)}</span>${p.compareAtPrice?`<span class="text-base text-ink-faint line-through tnum">${USM.money(p.compareAtPrice)}</span><span class="rounded-full bg-ember-50 px-2.5 py-1 text-xs font-semibold text-ember">−${discount}%</span>`:''}</div>
+        <div class="mt-8"><h3 class="mb-2 text-sm font-medium text-ink">O'lchamni tanlang · EU</h3>
+          ${sizes.length? `<div class="grid grid-cols-4 gap-2 sm:grid-cols-6" id="sizes">${sizes.map((s,i)=>`<button onclick="selSize('${s}')" data-size="${s}" class="szbtn rounded-xl border py-3 text-sm font-medium tnum ${i===0?'border-ember bg-ember text-white':'border-line text-ink'}">${s}</button>`).join("")}</div>` : `<p class="rounded-xl bg-chalk px-4 py-3 text-sm text-ink-muted">Hozircha mavjud emas.</p>`}
+        </div>
+        <div class="mt-6 flex gap-3"><button onclick="addToCartDetail('${p.id}')" ${sizes.length?'':'disabled'} class="btn btn-ember flex-1 py-3.5 text-base" id="addBtn">Savatga qo'shish</button></div>
+        <div class="mt-8 flex items-center gap-3 rounded-2xl border border-line bg-chalk px-5 py-4 text-sm font-semibold text-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-ember"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> O'zbekiston bo'ylab yetkazib beramiz.</div>
+        ${p.description?`<div class="mt-8"><h3 class="mb-2 font-display text-sm font-bold uppercase tracking-wider text-ink">Mahsulot haqida</h3><p class="text-sm leading-relaxed text-ink-muted">${USM.esc(p.description)}</p></div>`:''}
+      </div>
+    </div>
+    ${related.length?`<section class="mt-20"><h2 class="mb-6 font-display text-2xl font-extrabold uppercase tracking-tight text-ink">${USM.esc(p.brandName)} — yana</h2><div class="grid grid-cols-2 gap-4 lg:grid-cols-4">${related.map(r=>card(r)).join("")}</div></section>`:''}
+  </div>`;
+  window._selSize = sizes[0]||"";
+  startGalleryAuto();
+}
+function selSize(s){ window._selSize=s; document.querySelectorAll(".szbtn").forEach(b=>{ const on=b.dataset.size===s; b.className=`szbtn rounded-xl border py-3 text-sm font-medium tnum ${on?'border-ember bg-ember text-white':'border-line text-ink'}`; }); }
+function galSet(i){ window._galI=i; const w=$("#galMainWrap"); if(w&&window._gal&&window._gal[i]!=null) w.innerHTML=window._gal[i]; document.querySelectorAll(".galThumb").forEach((el,idx)=>{ el.className=`galThumb aspect-square overflow-hidden rounded-xl border-2 ${idx===i?'border-ember':'border-line'}`; }); }
+function startGalleryAuto(){ stopGalleryAuto(); if(window._gal && window._gal.length>1) window._galTimer=setInterval(()=>{ const n=((window._galI||0)+1)%window._gal.length; galSet(n); }, 3500); }
+function stopGalleryAuto(){ if(window._galTimer){ clearInterval(window._galTimer); window._galTimer=null; } }
+function openZoom(){ if(!window._gal) return; const i=window._galI||0; const big = window._galSrc ? `<img src="${window._galSrc[i]}" alt="" class="max-h-[86vh] w-full object-contain"/>` : `<div class="aspect-[4/5] w-full">${window._gal[i]}</div>`;
+  $("#modalRoot").innerHTML=`<div class="fixed inset-0 z-[70] flex items-center justify-center bg-ink/85 p-4" onclick="$('#modalRoot').innerHTML=''"><div class="relative w-full max-w-3xl" onclick="event.stopPropagation()"><div class="overflow-hidden rounded-2xl bg-white">${big}</div><button onclick="$('#modalRoot').innerHTML=''" class="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-ink shadow-lg">✕</button>${window._gal.length>1?`<div class="mt-4 flex items-center justify-center gap-2">${window._gal.map((_,k)=>`<button onclick="event.stopPropagation();galSet(${k});openZoom()" class="h-2 rounded-full transition-all ${k===i?'w-6 bg-white':'w-2 bg-white/40'}"></button>`).join("")}</div>`:''}</div></div>`; }
+function addToCartDetail(id){ const p=USM.product(id); if(!p||!window._selSize)return; USM.cart.add({productId:p.id,name:p.name,brandName:p.brandName,price:p.price,size:window._selSize,qty:1,image:p.image}); updateCart(); openCart(); const b=$("#addBtn"); if(b){b.textContent="✓ Qo'shildi"; setTimeout(()=>b.textContent="Savatga qo'shish",1400);} }
+
+/* ---------- CART ---------- */
+function updateCart(){ const c=USM.cart.count(); const el=$("#cartCount"); if(el){ el.textContent=c; el.classList.toggle("hidden",c===0); el.classList.toggle("flex",c>0);} }
+function openCart(){ renderCart(true); }
+function closeCart(){ $("#cartRoot").innerHTML=""; }
+function renderCart(open){
+  const items=USM.cart.items(), sub=USM.cart.subtotal(), ship=sub>800||sub===0?0:25;
+  $("#cartRoot").innerHTML = `<div class="fixed inset-0 z-50"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="closeCart()"></div>
+    <aside class="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-paper shadow-2xl">
+      <div class="flex items-center justify-between border-b border-line px-6 py-5"><div><p class="kicker">Sizning tanlovingiz</p><h2 class="mt-0.5 font-display text-xl font-bold text-ink">Savat (${USM.cart.count()})</h2></div><button onclick="closeCart()" class="rounded-lg p-2 text-ink-faint hover:text-ink">✕</button></div>
+      ${items.length? `<div class="flex-1 space-y-4 overflow-y-auto px-6 py-5">${items.map(it=>`
+        <div class="flex gap-4"><div class="h-24 w-20 shrink-0 rounded-xl overflow-hidden">${visual(it.image?{image:it.image,name:it.name}:{name:it.name,brandName:it.brandName},"h-full w-full",false)}</div>
+        <div class="min-w-0 flex-1"><p class="text-[11px] font-semibold uppercase tracking-wider text-ink-faint">${USM.esc(it.brandName)}</p><h3 class="truncate text-sm font-medium text-ink">${USM.esc(it.name.replace(it.brandName,'').trim()||it.name)}</h3><p class="text-xs text-ink-faint">EU ${it.size}</p>
+        <div class="mt-2 flex items-center justify-between"><div class="flex items-center rounded-lg border border-line"><button onclick="cartQty('${it.productId}','${it.size}',${it.qty-1})" class="px-2.5 py-1 text-ink-muted">−</button><span class="w-7 text-center text-sm font-medium tnum">${it.qty}</span><button onclick="cartQty('${it.productId}','${it.size}',${it.qty+1})" class="px-2.5 py-1 text-ink-muted">+</button></div><span class="text-sm font-semibold text-ink tnum">${USM.money(it.price*it.qty)}</span></div></div>
+        <button onclick="cartRemove('${it.productId}','${it.size}')" class="self-start rounded-lg p-1.5 text-ink-faint hover:text-rose-600">🗑</button></div>`).join("")}</div>
+        <div class="border-t border-line px-6 py-5"><div class="space-y-1.5 text-sm"><div class="flex justify-between text-ink-muted"><span>Oraliq jami</span><span class="tnum">${USM.money(sub)}</span></div><div class="flex justify-between text-ink-muted"><span>Yetkazish</span><span class="tnum">${ship===0?'Bepul':USM.money(ship)}</span></div><div class="flex justify-between pt-1 font-semibold text-ink"><span>Jami</span><span class="tnum">${USM.money(sub+ship)}</span></div></div>
+        <button onclick="closeCart();checkout()" class="btn btn-ember mt-4 w-full py-3">Buyurtmani rasmiylashtirish →</button></div>`
+      : `<div class="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center"><p class="text-sm text-ink-muted">Savatingiz bo'sh.</p><button onclick="closeCart()" class="btn btn-ember mt-2">Xaridni boshlash</button></div>`}
+    </aside></div>`;
+}
+function cartQty(p,s,q){ USM.cart.setQty(p,s,q); updateCart(); renderCart(true); }
+function cartRemove(p,s){ USM.cart.remove(p,s); updateCart(); renderCart(true); }
+
+/* ---------- CHECKOUT ---------- */
+function checkout(){
+  const items=USM.cart.items(); if(!items.length){ location.hash="#/shop"; return; }
+  const sub=USM.cart.subtotal(), ship=sub>800?0:25;
+  $("#modalRoot").innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML=''"></div>
+    <div class="relative z-10 w-full max-w-lg card p-6"><h2 class="font-display text-2xl font-extrabold text-ink">Rasmiylashtirish</h2>
+    <form id="coForm" class="mt-5 space-y-4"><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">To'liq ism</label><input id="coName" class="input" required placeholder="Aziz Karimov"/></div>
+    <div class="grid grid-cols-2 gap-4"><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">Telefon raqam</label><input id="coPhone" type="tel" class="input" required value="+998 " placeholder="+998 90 123 45 67"/></div><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">Shahar</label><input id="coCity" class="input" required placeholder="Andijon"/></div></div>
+    <div id="coErr" class="hidden rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700"></div>
+    <div class="rounded-xl bg-chalk p-4 text-sm"><div class="flex justify-between text-ink-muted"><span>Jami (${USM.cart.count()} mahsulot)</span><span class="tnum font-semibold text-ink">${USM.money(sub+ship)}</span></div></div>
+    <button class="btn btn-ember w-full py-3">Buyurtma berish · ${USM.money(sub+ship)}</button></form></div></div>`;
+  $("#coForm").addEventListener("submit", e=>{ e.preventDefault();
+    const phone=$("#coPhone").value.trim();
+    const digits=phone.replace(/[^0-9]/g,"");
+    if(!phone.startsWith("+998") || digits.length<12){ const el=$("#coErr"); el.textContent="Telefon raqam +998 bilan boshlanishi va to'liq bo'lishi kerak."; el.classList.remove("hidden"); return; }
+    const r=USM.createOrder({name:$("#coName").value,phone,city:$("#coCity").value}, items.map(i=>({productId:i.productId,size:i.size,qty:i.qty})));
+    USM.cart.clear(); updateCart();
+    $("#modalRoot").innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML='';location.hash='#/'"></div>
+      <div class="relative z-10 w-full max-w-md card p-8 text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl btn-ember text-3xl">✓</div><p class="kicker mt-6">Buyurtma tasdiqlandi</p><h2 class="mt-2 font-display text-3xl font-extrabold text-ink">Rahmat!</h2><p class="mt-3 text-ink-muted"><b>${r.number}</b> raqamli, <b>${USM.money(r.total)}</b> summadagi buyurtmangiz qabul qilindi.</p><button onclick="$('#modalRoot').innerHTML='';location.hash='#/shop'" class="btn btn-ember mt-6">Xaridni davom ettirish</button></div></div>`;
+  });
+}
+
+/* mobile navigation menu */
+function openMenu(){
+  const L=[["Bosh sahifa","#/"],["Do'kon","#/shop"],["Lyuks","#/shop?tier=Luxury"],["Sport","#/shop?tier=Sport"]];
+  $("#modalRoot").innerHTML=`<div class="fixed inset-0 z-[60] lg:hidden"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML=''"></div>
+    <div class="absolute right-0 top-0 h-full w-72 max-w-[82vw] bg-paper p-6 shadow-2xl">
+      <div class="flex items-center justify-between"><span class="font-display text-sm font-extrabold uppercase tracking-[0.2em] text-ink">Menyu</span><button onclick="$('#modalRoot').innerHTML=''" class="rounded-lg p-2 text-ink-faint">✕</button></div>
+      <nav class="mt-6 flex flex-col gap-1 text-lg font-medium text-ink">
+        ${L.map(([t,h])=>`<a href="${h}" onclick="$('#modalRoot').innerHTML=''" class="rounded-xl px-3 py-3 transition hover:bg-chalk">${t}</a>`).join("")}
+        <button onclick="$('#modalRoot').innerHTML='';scrollToSection('about')" class="rounded-xl px-3 py-3 text-left transition hover:bg-chalk">Biz haqimizda</button>
+        <button onclick="$('#modalRoot').innerHTML='';scrollToSection('aloqa')" class="rounded-xl px-3 py-3 text-left transition hover:bg-chalk">Aloqa</button>
+      </nav>
+      <a href="admin.html" class="mt-6 block text-sm font-medium text-ember">Boshqaruv paneli →</a>
+    </div></div>`;
+}
+
+/* scroll to a home-page section (works from any view) */
+function scrollToSection(id){
+  const doScroll=()=>{ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth"}); };
+  if(location.hash!=="#/" && location.hash!==""){ location.hash="#/"; setTimeout(doScroll,160); }
+  else doScroll();
+}
+
+/* ---------- ROUTER ---------- */
+function router(){
+  const raw = location.hash.slice(1) || "/";
+  const [path, query] = raw.split("?");
+  const params = new URLSearchParams(query||"");
+  const mr=$("#modalRoot"); if(mr) mr.innerHTML=""; const cr=$("#cartRoot"); if(cr) cr.innerHTML="";
+  if(carouselTimer){ clearInterval(carouselTimer); carouselTimer=null; }
+  if(typeof stopGalleryAuto==="function") stopGalleryAuto();
+  if(path.startsWith("/product/")) product(path.split("/")[2]);
+  else if(path==="/shop"){ shopState={q:"",brandId:params.get("brandId")||"",tier:params.get("tier")||"",sort:"newest"}; shop(); }
+  else home();
+  scrollTo(0,0);
+}
+addEventListener("hashchange", router);
+updateCart(); router();
+</script>
+</body>
+</html>
