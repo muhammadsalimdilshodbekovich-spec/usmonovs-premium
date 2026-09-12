@@ -427,7 +427,8 @@ function router(){
   scrollTo(0,0);
 }
 addEventListener("hashchange", router);
-updateCart(); router();
+(function(){ const m=view&&view(); if(m) m.innerHTML='<div style="padding:7rem 1.25rem;text-align:center;color:#9A9AA0">Yuklanmoqda…</div>'; })();
+USM.ready().then(()=>{ updateCart(); router(); });
 </script>
 </body>
 </html>

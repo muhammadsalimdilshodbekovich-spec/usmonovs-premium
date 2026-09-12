@@ -148,7 +148,7 @@ function openProduct(id){editP=id?USM.product(id):null;const p=editP;formImgs=p?
     <div class="grid grid-cols-2 gap-4"><div class="col-span-2"><label class="label">Mahsulot nomi</label><input id="f_name" class="input" value="${p?USM.esc(p.name):''}" placeholder="masalan: Balenciaga Triple S"/></div>
     <div><label class="label">Brend</label><select id="f_brand" class="input"><option value="">Brendni tanlang…</option>${brands.map(b=>`<option value="${b.id}" ${p&&p.brandId===b.id?'selected':''}>${USM.esc(b.name)}</option>`).join("")}</select></div>
     <div><label class="label">Rang</label><input id="f_color" class="input" value="${p?USM.esc(p.colorway):''}" placeholder="Triple White"/></div>
-    <div><label class="label">Narx (USD)</label><input id="f_price" type="number" class="input" value="${p?p.price:''}"/></div>
+    <div><label class="label">Narx (so'm)</label><input id="f_price" type="number" class="input" placeholder="masalan: 1500000" value="${p?p.price:''}"/></div>
     <div><label class="label">Eski narx</label><input id="f_cmp" type="number" class="input" value="${p&&p.compareAtPrice?p.compareAtPrice:''}"/></div>
     <div><label class="label">SKU</label><input id="f_sku" class="input" value="${p?p.sku:''}" placeholder="Avtomatik"/></div>
     <div><label class="label">Holat</label><select id="f_status" class="input">${[["Draft","Qoralama"],["Active","Faol"],["Archived","Arxivlangan"]].map(([v,l])=>`<option value="${v}" ${p&&p.status===v?'selected':''}>${l}</option>`).join("")}</select></div></div>
@@ -242,7 +242,7 @@ const AUTHKEY="usm_admin_auth";
 function showApp(){$("#login").hidden=true;$("#app").hidden=false;if(!$("#nav").querySelector(".navlink"))renderNav();go("dashboard");}
 $("#loginForm").addEventListener("submit",e=>{e.preventDefault();if(USM.login($("#lEmail").value,$("#lPass").value)){try{sessionStorage.setItem(AUTHKEY,"1");}catch(e){}showApp();}else{const el=$("#lErr");el.textContent="Email yoki parol noto'g'ri.";el.classList.remove("hidden");}});
 function logout(){try{sessionStorage.removeItem(AUTHKEY);}catch(e){}$("#app").hidden=true;$("#login").hidden=false;}
-if(sessionStorage.getItem(AUTHKEY)==="1")showApp();
+USM.ready().then(()=>{ if(sessionStorage.getItem(AUTHKEY)==="1")showApp(); });
 </script>
 </body>
 </html>
