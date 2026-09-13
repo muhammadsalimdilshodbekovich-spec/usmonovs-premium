@@ -370,26 +370,44 @@ function cartQty(p,s,q){ USM.cart.setQty(p,s,q); updateCart(); renderCart(true);
 function cartRemove(p,s){ USM.cart.remove(p,s); updateCart(); renderCart(true); }
 
 /* ---------- CHECKOUT ---------- */
+const TG_ADMIN = "Usmonovs_Adminn"; // Telegram admin useri (@ belgisiz)
 function checkout(){
   const items=USM.cart.items(); if(!items.length){ location.hash="#/shop"; return; }
-  const sub=USM.cart.subtotal(), ship=sub>800?0:25;
+  const sub=USM.cart.subtotal();
   $("#modalRoot").innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML=''"></div>
     <div class="relative z-10 w-full max-w-lg card p-6"><h2 class="font-display text-2xl font-extrabold text-ink">Rasmiylashtirish</h2>
+    <p class="mt-1 text-sm text-ink-muted">Ma'lumotlarni to'ldiring — buyurtmangiz <b>Telegram</b> orqali adminga yuboriladi.</p>
     <form id="coForm" class="mt-5 space-y-4"><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">To'liq ism</label><input id="coName" class="input" required placeholder="Aziz Karimov"/></div>
     <div class="grid grid-cols-2 gap-4"><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">Telefon raqam</label><input id="coPhone" type="tel" class="input" required value="+998 " placeholder="+998 90 123 45 67"/></div><div><label class="mb-1 block text-xs font-medium uppercase tracking-wider text-ink-muted">Shahar</label><input id="coCity" class="input" required placeholder="Andijon"/></div></div>
     <div id="coErr" class="hidden rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700"></div>
-    <div class="rounded-xl bg-chalk p-4 text-sm"><div class="flex justify-between text-ink-muted"><span>Jami (${USM.cart.count()} mahsulot)</span><span class="tnum font-semibold text-ink">${USM.money(sub+ship)}</span></div></div>
-    <button class="btn btn-ember w-full py-3">Buyurtma berish · ${USM.money(sub+ship)}</button></form></div></div>`;
+    <div class="rounded-xl bg-chalk p-4 text-sm"><div class="flex justify-between text-ink-muted"><span>Jami (${USM.cart.count()} mahsulot)</span><span class="tnum font-semibold text-ink">${USM.money(sub)}</span></div></div>
+    <button class="btn btn-ember w-full py-3">Telegram orqali buyurtma berish →</button></form></div></div>`;
   $("#coForm").addEventListener("submit", e=>{ e.preventDefault();
-    const phone=$("#coPhone").value.trim();
+    const name=$("#coName").value.trim(), phone=$("#coPhone").value.trim(), city=$("#coCity").value.trim();
     const digits=phone.replace(/[^0-9]/g,"");
     if(!phone.startsWith("+998") || digits.length<12){ const el=$("#coErr"); el.textContent="Telefon raqam +998 bilan boshlanishi va to'liq bo'lishi kerak."; el.classList.remove("hidden"); return; }
-    const r=USM.createOrder({name:$("#coName").value,phone,city:$("#coCity").value}, items.map(i=>({productId:i.productId,size:i.size,qty:i.qty})));
+    const lines=items.map(i=>`• ${i.name}${(i.size&&i.size!=="—")?" (o'lcham: "+i.size+")":""} × ${i.qty} — ${USM.money(i.price*i.qty)}`).join("\n");
+    const msg=`🛍 Yangi buyurtma — Usmonovs Premium\n\n👤 Mijoz: ${name}\n📞 Telefon: ${phone}\n📍 Shahar: ${city}\n\nMahsulotlar:\n${lines}\n\n💰 Jami: ${USM.money(sub)}`;
+    const tgURL="https://t.me/"+TG_ADMIN+"?text="+encodeURIComponent(msg);
+    window._orderMsg=msg;
+    try{ if(navigator.clipboard) navigator.clipboard.writeText(msg); }catch(_){}
+    window.open(tgURL,"_blank");
     USM.cart.clear(); updateCart();
     $("#modalRoot").innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" onclick="$('#modalRoot').innerHTML='';location.hash='#/'"></div>
-      <div class="relative z-10 w-full max-w-md card p-8 text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl btn-ember text-3xl">✓</div><p class="kicker mt-6">Buyurtma tasdiqlandi</p><h2 class="mt-2 font-display text-3xl font-extrabold text-ink">Rahmat!</h2><p class="mt-3 text-ink-muted"><b>${r.number}</b> raqamli, <b>${USM.money(r.total)}</b> summadagi buyurtmangiz qabul qilindi.</p><button onclick="$('#modalRoot').innerHTML='';location.hash='#/shop'" class="btn btn-ember mt-6">Xaridni davom ettirish</button></div></div>`;
+      <div class="relative z-10 w-full max-w-md card p-8 text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl btn-ember text-3xl">✈️</div>
+      <p class="kicker mt-6">Deyarli tayyor</p><h2 class="mt-2 font-display text-2xl font-extrabold text-ink">Telegram ochildi</h2>
+      <p class="mt-3 text-sm text-ink-muted">Buyurtma xabari tayyorlandi. <b>@${TG_ADMIN}</b> chatida <b>yuborish (➤)</b> tugmasini bosing — buyurtmangiz adminga yetib boradi.</p>
+      <p class="mt-2 text-xs text-ink-faint">Agar Telegram ochilmagan yoki xabar tayyor bo'lmagan bo'lsa, quyidagi tugmalardan foydalaning.</p>
+      <div class="mt-5 flex flex-col gap-2">
+        <a href="${tgURL}" target="_blank" class="btn btn-ember py-3">Telegramda ochish</a>
+        <button onclick="copyOrderMsg(this)" class="btn btn-ghost py-3">Buyurtma matnidan nusxa olish</button>
+        <button onclick="$('#modalRoot').innerHTML='';location.hash='#/shop'" class="btn btn-ghost py-2.5">Xaridni davom ettirish</button>
+      </div></div></div>`;
   });
 }
+function copyOrderMsg(btn){ const t=window._orderMsg||""; const done=()=>{ if(btn){ btn.textContent="✓ Nusxa olindi"; setTimeout(()=>{ if(btn) btn.textContent="Buyurtma matnidan nusxa olish"; },1800); } };
+  try{ navigator.clipboard.writeText(t).then(done,()=>fallbackCopy(t,done)); }catch(e){ fallbackCopy(t,done); } }
+function fallbackCopy(t,done){ const ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); done&&done(); }catch(e){ alert("Nusxa olishda xatolik."); } document.body.removeChild(ta); }
 
 /* mobile navigation menu */
 function openMenu(){
